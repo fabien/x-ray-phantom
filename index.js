@@ -57,7 +57,7 @@ function driver(options, fn) {
           return document.documentElement.outerHTML;
         }).end().then(function(body) {
           ctx.body = body;
-          debug('%s - %s', ctx.url);
+          debug('%s - %s', ctx.url, ctx.status);
           done(null, ctx);
         }, done);
     };
