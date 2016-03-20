@@ -53,18 +53,13 @@ function driver(options, fn) {
 
     function select(err, ret) {
       if (err) return done(err);
-
-      nightmare
-        .evaluate(function() {
+      nightmare.evaluate(function() {
           return document.documentElement.outerHTML;
-        }, function(body) {
+        }).end().then(function(body) {
           ctx.body = body;
-        })
-        .run(function(err) {
-          if (err) return done(err);
-          debug('%s - %s', ctx.url, ctx.status);
+          debug('%s - %s', ctx.url);
           done(null, ctx);
-        });
+        }, done);
     };
   }
 }
